@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    
+    <div style="text-align: right; background-color: #EBF4FA; padding: 15px;">
+        <h2 style="margin-top: 30px; margin-right: 20px;">تمام مقالات</h2>
+        <p style="display: inline-block;">مقالات</p></a> / <a href="#" style="margin-right: 20px;">خانه</a>
+        <form action="" method="get" style="color: #EBF4FA; position: relative; left: -800px; top: -60px;">{{form}}</form>
+    </div>
+
+    {% for article in articles %}
+    
+        <div class="card" style="width: 25rem; border-radius: 10px; display: inline-block; margin-left: 35px; margin-top: 20px;position: relative;right: -50px;">
+        
+            <a href="#"><img src="{{article.img.url}}" class="card-img-top" alt="..." style="width: 398px; height: 280px; "></a>
+            <h6 style="text-align: right; position: relative;bottom: -10px;">{{article.title}}</h6>
+            <p style="text-align: right; position: relative;bottom: -12px; right: -260px; display: inline-block; position: relative;left: -0px; right: -10px; margin-left: 5px;">  نویسنده:{{article.auther}}</p><hr>
+           
+            <div class="card-body" style="height: 50px;">
+                <a href="{% url 'detail_article' article.id %}" class="btn btn-primary" style="position: relative; right: -245px; top: -20px;">مشاهده مطالب</a>
+                
+            </div>
+    
+        </div>
+    
+    {%endfor%}
+
+{% endblock %}

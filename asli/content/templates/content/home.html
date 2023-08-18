@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    
+    <div style="background-color: #E5E4E2; padding: 5px; text-align: right; height: 350px;">
+       <small style="display: inline-block; position: relative; bottom: -30px; left: -70px;">...نقشه راه پیشرفت چشمگیر</small><br>
+       <h3 style="display: inline-block; position: relative; bottom: -50px; left: -70px;">آیتچ مرجع آموزش پایتون</h3><br>
+       <form action="" method="get" style="color: #E5E4E2; position: relative; bottom: -60px;left: -148px; border-radius: 50px;">  {{form}} </form>
+        <h5 style="display: inline-block; position: relative;bottom: -90px; left: -50px;">هر چیزی که برای برنامه نویس پایتون شدن نیاز دارید</h5><br>
+        <img src="https://www.mongard.ir/static/img/header-left-bg_prev_ui.png" alt="" style="width: 450px;position: relative;left: -540px; top: -80px;">
+    </div><hr>
+    <a href="{% url 'list_course'%}" class="btn btn-primary" style="position: relative; bottom: -50px; right: -85px;">همه دوره ها</a>
+    <h4 style="text-align: right;margin-right: 80px;">دوره های برنامه نویس شو</h4>
+    <p style="text-align: right;margin-right: 80px;">رشد شما با یادگیری آغاز میشود</p><br>
+    
+    {% for course in courses %}
+    <div class="card" style="width: 25rem; border-radius: 10px; display: inline-block; margin-left: 35px; margin-top: 5px;position: relative;right: -50px;">
+        
+        <a href="{% url 'detail_course' course.id %}"><img src="{{course.img.url}}" class="card-img-top" alt="..." style="width: 398px; height: 280px; "></a>
+        <h6 style="text-align: right; position: relative;bottom: -10px;">{{course.title}}</h6>
+        <p style="text-align: right; position: relative;bottom: -12px; right: -260px; display: inline-block;">{{course.status}}:وضعیت دوره</p>
+        <p style="text-align: right;display: inline-block; position: relative;bottom: -10px; left: -110px;">مدرس:{{course.teacher}}</p><hr>
+        <div class="card-body" style="height: 50px;">
+            <a href="#" class="card-title">{{course.price}}</a>
+            <p style="text-align: right; position: relative; top: -30px;">زمان:{{course.time}}</p>
+        </div>
+
+    </div>
+    {% endfor %} <br>
+    <a href="{% url 'list_single_course'%}" class="btn btn-primary" style="position: relative; bottom: -50px; right: -85px;">همه دوره ها</a>
+    <h4 style="text-align: right;margin-right: 80px;">جدیدترین ویدیوهای تک قسمتی</h4>
+    <p style="text-align: right;margin-right: 80px;">هر ویدیو توضیح دهنده یک مبحث مهم و پیشرفته است</p><br>
+
+    {% for part in parts %}
+    <div class="card" style="width: 25rem; border-radius: 10px; display: inline-block; margin-left: 35px; margin-top: 5px;position: relative;right: -50px;">
+        
+        <a href="{% url 'detail_single_course' part.id %}"><img src="{{part.img.url}}" class="card-img-top" alt="..." style="width: 398px; height: 280px; "></a>
+        <h6 style="text-align: right; position: relative;bottom: -10px;">{{part.title}}</h6>
+        <p style="text-align: right; position: relative;top: 10px; display: inline-block;">{{part.auther}}</p><hr>
+        
+        <div class="card-body" style="height: 50px;">
+            {% for tags in part.tag.all%}
+            <a href="{% url 'filter_tag' tags.id %}"> {{tags.title}}</a>
+            {%endfor%}
+            
+            <p style="text-align: right; position: relative; top: -30px;">:برچسب ها</p><br>
+        </div>
+
+    </div>
+    {%endfor%} <br><br><br><br>
+
+    <div style="width: 100%; background-color:#EBF4FA; padding: 20px; text-align: center;">
+        <h3>وبلاگ آیتچ</h3>
+        <small style="text-align: center;">جدیدترین مطالب آموزشی از گوشه کنار وب</small>
+    </div><br><br><br>
+    
+    {% for article in articles %}
+    <div class="card" style="width: 25rem; border-radius: 10px; display: inline-block; margin-left: 35px; margin-top: 5px;position: relative;right: -50px; height: 282px; ">
+        
+        <a href="{% url 'detail_article' article.id %}"><img src="{{article.img.url}}" class="card-img-top" alt="..." style="width: 398px; height: 280px;"></a>
+        <div class="card-body" style="height: 50px;position: relative;top: -50px;border: solid 3px black; background-color: aliceblue; ">
+            <h6 style="color: black; text-align: right;">{{article.title}}</h6>
+        </div>
+    </div>
+    {%endfor%}
+
+    <a href="{% url 'list_article' %}" class="btn btn-primary" style="position: relative; left: -795px; top: -350px;">لیست مقالات</a>
+{% endblock %}

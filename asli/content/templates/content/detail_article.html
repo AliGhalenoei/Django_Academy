@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    
+    <div style="background-color:#EBF4FA ; padding: 35px; text-align: right;">
+       <h6 style="display: inline-block;">{{article.title}}</h6> / <a href="#">مقالات</a>  / <a href="#">خانه</a>
+    </div><br>
+
+    <div style="border: 2px solid#E5E4E2; padding: 10px; width: 650px; display: inline-block; margin-left: 25px;">
+        <h3 style="text-align: center; margin-top: 10px;">{{article.title}}</h3> <hr style="margin-top: 30px;"><br>
+        <p style="text-align: right;">نویسنده: {{article.auther}}</p>
+        <img src="{{article.img.url}}" alt="" style="width: 600px; margin-top: 10px;">
+        <h6 style="margin-top: 70px;">{{article.body|linebreaksbr}}</h6>
+    </div>
+
+    <div style="display: inline-block; border: solid 10px #E5E4E2; width: 300px; padding: 10px; position: relative; top: -1435px;">
+        {% for tag in article.tag.all %}
+        <h6 style="text-align: right;">:برچسب ها</h6>
+            <a href="{% url 'filter_tag_article' tag.id %}">{{tag.title}}</a>
+        {%endfor%}
+    </div>
+
+    
+
+{% endblock %}

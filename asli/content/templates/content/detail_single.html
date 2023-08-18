@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    
+<div style=" background-color: #EBF4FA; text-align: right; height: 120px;">
+    <h3 style="position: relative; bottom: -20px; left: -20px;">{{video.title}}</h3><br>
+    <p style="display: inline-block;">{{video.title}}</p> /<a href="{% url 'home' %}" style="margin-right: 20px;">خانه </a> / <a href="{% url 'list_course' %}"> ویدیوهای تک قسمتی</a> 
+</div><br>
+
+<div style="display: inline-block;width: 700px; margin-left: 25px; border: solid 2px #E5E4E2; padding: 15px;">
+    <h3 style="text-align: center;">{{video.title}}</h3><hr style="margin-top: 35px;">
+    <h6 style="text-align: right;"> نویسنده:{{video.auther}}</h6><br><br>
+    <video src="{{video.video.url}}" controls style="width: 100%;"></video><br><br><br>
+    <h6>{{video.body|linebreaksbr}}</h6>
+</div>
+
+<div style="border: solid 5px #E5E4E2; width:250px; display: inline-block;margin-left: 20px; padding: 10px;">
+    <h6 style="text-align: right;">برچسب ها</h6>
+    {% for t in video.tag.all%}
+        <a href="{% url 'filter_tag' t.id %}" style="text-decoration: none; margin-left: 3px;">{{t.title}}</a>
+    {%endfor%}
+</div>
+
+{% endblock %}

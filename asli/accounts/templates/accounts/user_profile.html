@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    
+    <div style="background-color: antiquewhite; padding: 15px; text-align: center; border-radius: 30px;">
+        <img src="{{user.img.url}}" alt="https://w7.pngwing.com/pngs/306/70/png-transparent-computer-icons-management-admin-silhouette-black-and-white-neck.png" style="border-radius: 50%; width: 160px;">
+        <a href="{% url 'logout' %}" class="btn btn-danger" style="position: relative; left: -550px; top: -70px; width: 70px;" >خروج</a>
+    </div>
+    <div style="background-color: aqua; padding: 15px; text-align: right; border-radius: 30px;margin-top: 5px;">
+            <h6>تلفن: {{user.user.phone}}</h6>
+            <h6 style="margin-top: 30px;">{{user.user.email}}:ایمیل</h6>
+    </div>
+
+    
+
+{% endblock %}

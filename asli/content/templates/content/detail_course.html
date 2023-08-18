@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    
+    <div style=" background-color: #EBF4FA; text-align: right; height: 120px;">
+        <h3 style="position: relative; bottom: -20px; left: -20px;">{{course.title}}</h3><br>
+        <p style="display: inline-block;">{{course.title}}</p> /<a href="{% url 'home' %}" style="margin-right: 20px;">خانه </a> / <a href="{% url 'list_course' %}">دوره ها</a> 
+    </div><br>
+
+    <div style="border: 2px solid#E5E4E2; width: 650px; margin-left: 20px; display: inline-block; padding: 10px;  height: 1500px;">
+        <img src="{{course.img.url}}" alt="" style="width: 600px;"><br><br><br>
+        <h2 style="text-align: right;">{{course.title}}</h2><br><br>
+        <h5 style="margin: 7px;">{{course.caption|linebreaksbr}}</h5><br><br>
+
+        
+            {% for video in videos%}
+            <a href="{% url 'upload_course' video.id %}" style="text-decoration: none;">
+            <div style="background-color: aliceblue; padding: 10px; text-align: right; margin-top: 7px;">
+                
+                    {{video.number}} 
+                
+            </div>
+            </a>
+            {%endfor%}
+        
+        
+    </div>
+    <div style="border: 12px solid #E5E4E2; width: 300px; display: inline-block; margin-left: 15px; text-align: right; padding: 15px; position: relative; top: -1030px;">
+        <h5>{{course.price}} :قیمت دوره</h5><hr>
+
+        <h6>مدرس دوره: {{course.teacher}}</h6>
+        <h6 style="margin-top: 10px;">زمان کل: {{course.time}}</h6>
+        <h6>وضعیت دوره: {{course.status}}</h6><br>
+        <input class="btn btn-primary" type="submit" value="ثبت نام در دوره" style="width: 250px;">
+        
+    </div><br><br>
+
+    <div style="width: 100%; border-radius: 20px; background-color: #EBF4FA;text-align: right; ">
+        <h5 style="margin-top: 10px; margin-right: 10px; display: inline-block;">ارسال نظر</h5>
+        <form action="" method="post">
+            {%csrf_token%}
+                {{form.as_p}}
+                    <input type="submit" value="Send" class="btn btn-primary" style="position: relative; left: -318px; top: -57px;">
+        </form>
+    </div><br>
+
+    {% for comment in comments %}
+        <div style="background-color: #F5F5F5; text-align: right;">
+            <h5 style="margin-top: 8px; margin-right: 8px;">{{comment.user.email}}</h5>
+            <a href="{% url 'update_comment' comment.id %}" class="btn btn-success" style="position: relative; left: -850px; top: -30px;">Update</a>
+            <a href="{% url 'delete_comment' comment.id %}" class="btn btn-danger" style="position: relative; left: -840px; top: -30px;">Delete</a>
+            <h6>{{comment.body|linebreaksbr}}</h6>
+        </div>
+        <div style="background-color: #dfdede; text-align: right; padding: 7px;"><br>
+            {% for sub in comment.scoment.all %}
+                <h5>Admin</h5>
+                <h6>{{sub.body}}</h6>
+            {%endfor%}
+        </div>
+    {%endfor%}
+
+{% endblock %}

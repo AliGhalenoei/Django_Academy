@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div style="background-color:#EBF4FA; text-align: right; padding: 15px;">
+        <h3>تمام ویدیوهای تک قسمتی</h3>
+        <h6>هر ویدیو توضیح دهنده یک مبحث مهم و پیشرفته است</h6>
+        <p style="display: inline-block;"> ویدیوهای تک قسمتی</p> / <a href="{% url 'home' %}" style="text-decoration: none; margin-right: 10px;">خانه</a> 
+    </div>
+    <div style="background-color: white; padding: 7px; border:solid 3px #DADBDD ;margin-top: 5px;">
+        <form action="" method="get">{{form}}</form>
+    </div>
+
+    {% for part in parts %}
+    <div class="card" style="width: 25rem; border-radius: 10px; display: inline-block; margin-left: 35px; margin-top: 5px;position: relative;right: -50px;">
+        
+        <a href="{% url 'detail_single_course' part.id %}"><img src="{{part.img.url}}" class="card-img-top" alt="..." style="width: 398px; height: 280px; "></a>
+        <h6 style="text-align: right; position: relative;bottom: -10px;">{{part.title}}</h6>
+        <p style="text-align: right; position: relative;top: 10px; display: inline-block;">{{part.auther}}</p><hr>
+        
+        <div class="card-body" style="height: 50px;">
+            {% for tags in part.tag.all%}
+            <a href="{% url 'filter_tag' tags.id %}"> {{tags.title}}</a>
+            {%endfor%}
+            
+            <p style="text-align: right; position: relative; top: -30px;">:برچسب ها</p><br>
+        </div>
+
+    </div>
+    {%endfor%}
+
+{% endblock %}
